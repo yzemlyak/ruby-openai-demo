@@ -2,7 +2,7 @@
 require "openai"
 require "dotenv/load"
 client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_API_KEY"))
-# pp client
+
 # Prepare an Array of previous messages
 message_list = [
   {
@@ -14,6 +14,14 @@ message_list = [
     "content" => "Hello! What are the best spots for pizza in Chicago?"
   }
 ]
+
+user_msg = ""
+while user_msg != "bye"
+  puts "Hello! How can I help you today?"
+  puts "-" * 50
+  user_msg = gets.chomp
+  if user_msg != "bye"
+    message_list.push({"role" => "user", "content" => user_input})
 
 # Call the API to get the next message from GPT
 api_response = client.chat(
